@@ -1,7 +1,7 @@
-
-
 import pygame
 import sys
+from config import WIDTH, HEIGHT, COLS, CELL_SIZE, \
+     WHITE, GREY
 
 WIDTH, HEIGHT = 600, 600
 ROWS, COLS = 30, 30
@@ -10,6 +10,7 @@ CELL_SIZE = WIDTH // COLS
 WHITE = (255, 255, 255)
 BLACK = (0, 0 ,0)
 GREY = (200, 200, 200)
+BLUE = (0, 120, 255)
 
 def draw_grid(win):
     for x in range(0, WIDTH, CELL_SIZE):
