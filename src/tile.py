@@ -1,5 +1,5 @@
 import pygame
-from config import WHITE, BLACK, CELL_SIZE
+from config import WHITE, BLACK, CELL_SIZE, GREEN, RED
 
 class Tile:
     def __init__(self, row, col) -> None:
@@ -25,3 +25,10 @@ class Tile:
         self.color = WHITE
         self.is_wall = False
 
+
+    def make_start(self):
+        self.color = GREEN
+
+
+    def make_end(self):
+        self.color = RED
