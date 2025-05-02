@@ -1,5 +1,6 @@
 import pygame
-from config import WHITE, BLACK, CELL_SIZE, GREEN, RED, ROWS, COLS
+from config import WHITE, BLACK, CELL_SIZE, GREEN, RED, ROWS, COLS, \
+    PURPLE, TURQUISE, YELLOW
 
 class Tile:
     def __init__(self, row, col) -> None:
@@ -9,7 +10,7 @@ class Tile:
         self.x = col * CELL_SIZE
         self.y = row * CELL_SIZE
         self.color = WHITE
-        self.if_wall = False
+        self.is_wall = False
 
 
     def draw(self, win):
@@ -33,6 +34,22 @@ class Tile:
     def make_end(self):
         self.color = RED
     
+
+    def get_pos(self):
+        return self.row, self.col
+
+
+    def make_open(self):
+        self.color = TURQUISE
+
+
+    def make_closed(self):
+        self.color = PURPLE
+
+
+    def make_path(self):
+        self.color = YELLOW
+
 
     def update_neighbors(self, grid):
         self.neighbors = []
