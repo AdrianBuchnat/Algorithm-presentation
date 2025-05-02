@@ -15,7 +15,7 @@ def draw_grid(win):
 
 
 def draw_legend(win):
-    font = pygame.font.Font(None, 18)
+    font = pygame.font.Font(None, 24)
 
     legend_items = [
         ("Start", GREEN),
@@ -31,7 +31,7 @@ def draw_legend(win):
         text = font.render(label, True, (0, 0, 0))
         win.blit(text, (40, 10 + i * 30))
 
-    controls = "LMB - draw, RMB - erase, A - A*, D - Dijkstra, R - Erase all"
+    controls = "[LMB] - draw [RMB] - Erase [A] - A* [D] - Dijkstra [R] - Erase all"
     text_surface = font.render(controls, True, (0, 0, 0))
     win.blit(text_surface, (10, HEIGHT - 30))
 
