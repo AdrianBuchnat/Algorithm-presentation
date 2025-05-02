@@ -13,12 +13,12 @@ class Tile:
         self.is_wall = False
 
 
-    def __eq__(self, other):
-        return isinstance(other, Tile) and self.row == other.row and self.col == other.col
-
-
-    def __hash__(self):
-        return hash((self.row, self.col))
+#    def __eq__(self, other):
+#        return isinstance(other, Tile) and self.row == other.row and self.col == other.col
+#
+#
+#    def __hash__(self):
+#        return hash((self.row, self.col))
 
 
     def draw(self, win):
