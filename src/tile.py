@@ -1,5 +1,5 @@
 import pygame
-from config import WHITE, BLACK, CELL_SIZE, GREEN, RED
+from config import WHITE, BLACK, CELL_SIZE, GREEN, RED, ROWS, COLS
 
 class Tile:
     def __init__(self, row, col) -> None:
@@ -32,3 +32,16 @@ class Tile:
 
     def make_end(self):
         self.color = RED
+    
+
+    def update_neighbors(self, grid):
+        self.neighbors = []
+        if self. row < ROWS - 1 and not grid[self.row + 1][self.col].is_wall: #Bottom tile
+            self.neighbors.append(grid[self.row + 1][self.col])
+        if self.row > 0 and not grid[self.row - 1][self.col].is_wall: #Up tile
+            self.neighbors.append(grid[self.row - 1][self.col])
+        if self.col < COLS - 1 and not grid[self.row][self.col + 1].is_wall:
+            self.neighbors.append(grid[self.row][self.col + 1])
+        if self.col > 0 and not grid[self.row][self.col - 1].is_wall:
+            self.neighbors.append(grid[self.row][self.col - 1])
+

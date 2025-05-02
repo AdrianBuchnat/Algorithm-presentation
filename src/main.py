@@ -3,6 +3,7 @@ import sys
 from config import ROWS, WIDTH, HEIGHT, COLS, CELL_SIZE, \
      WHITE, GREY
 from tile import Tile
+from astar import astar
 
 
 def draw_grid(win):
@@ -54,6 +55,15 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE and start and end:
+                    for row in grid:
+                        for tile in row:
+                            tile.update_neighbors(grid)
+
+                    astar(lambda: draw(win, grid), grid, start, end)
+
+                
 
         #left click - set start, end or wall
         if pygame.mouse.get_pressed()[0]:
