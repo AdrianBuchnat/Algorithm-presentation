@@ -4,6 +4,7 @@ from config import BLACK, PURPLE, ROWS, TURQUISE, WIDTH, HEIGHT, COLS, CELL_SIZE
      WHITE, GREY, YELLOW, RED, GREEN
 from tile import Tile
 from astar import astar
+from dikstra import dikstra
 
 
 def draw_grid(win):
@@ -30,7 +31,11 @@ def draw_legend(win):
         text = font.render(label, True, (0, 0, 0))
         win.blit(text, (40, 10 + i * 30))
 
-        
+    controls = "LMB - draw, RMB - erase, A - A*, D - Dijkstra, R - Erase all"
+    text_surface = font.render(controls, True, (0, 0, 0))
+    win.blit(text_surface, (10, HEIGHT - 30))
+
+
 def draw(win, grid):
     win.fill(WHITE)
     for row in grid:
@@ -85,6 +90,14 @@ def main():
                             tile.update_neighbors(grid)
 
                     astar(lambda: draw(win, grid), grid, start, end)
+                    changed = True
+
+                elif event.key == pygame.K_d and start and end:
+                    for row in grid:
+                        for tile in row:
+                            tile.update_neighbors(grid)
+                    dikstra(lambda: draw(win, grid), grid, start, end)
+                    changed = True
 
                 elif event.key == pygame.K_r:
                     start = None
