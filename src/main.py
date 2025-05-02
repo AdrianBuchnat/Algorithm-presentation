@@ -1,7 +1,7 @@
 import pygame
 import sys
-from config import ROWS, WIDTH, HEIGHT, COLS, CELL_SIZE, \
-     WHITE, GREY
+from config import BLACK, PURPLE, ROWS, TURQUISE, WIDTH, HEIGHT, COLS, CELL_SIZE, \
+     WHITE, GREY, YELLOW, RED, GREEN
 from tile import Tile
 from astar import astar
 
@@ -12,13 +12,34 @@ def draw_grid(win):
     for y in range(0, HEIGHT, CELL_SIZE):
         pygame.draw.line(win, GREY, (0, y), (WIDTH, y))
 
+
+def draw_legend(win):
+    font = pygame.font.Font(None, 18)
+
+    legend_items = [
+        ("Start", GREEN),
+        ("End", RED),
+        ("Wall", BLACK),
+        ("Open", TURQUISE),
+        ("Closed", PURPLE),
+        ("Path", YELLOW)
+    ]
+
+    for i, (label, color) in enumerate(legend_items):
+        pygame.draw.rect(win, color, (10, 10 + i * 30, 20, 20))
+        text = font.render(label, True, (0, 0, 0))
+        win.blit(text, (40, 10 + i * 30))
+
+        
 def draw(win, grid):
     win.fill(WHITE)
     for row in grid:
         for tile in row:
             tile.draw(win)
-        draw_grid(win)
-        pygame.display.update()
+
+    draw_grid(win)
+    draw_legend(win)
+    pygame.display.update()
 
 
 def get_clicked_pos(pos):
@@ -32,8 +53,10 @@ def make_grid():
     return[[Tile(row,col) for col in range(COLS)] for row in range(ROWS)]
 
 
+
 def main():
     pygame.init()
+    pygame.font.init()
     win = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("Pathfinding Visualizer")
     
@@ -46,7 +69,7 @@ def main():
     end = None
 
     while run:
-        clock.tick(20)
+        clock.tick(10)
 
         if changed == True:
             draw(win, grid)
@@ -56,13 +79,18 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE and start and end:
+                if event.key == pygame.K_a and start and end:
                     for row in grid:
                         for tile in row:
                             tile.update_neighbors(grid)
 
                     astar(lambda: draw(win, grid), grid, start, end)
 
+                elif event.key == pygame.K_r:
+                    start = None
+                    end = None
+                    grid = make_grid()
+                    changed = True
                 
 
         #left click - set start, end or wall
