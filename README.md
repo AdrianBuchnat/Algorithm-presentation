@@ -2,8 +2,8 @@
 
 This project visualizes the behavior of pathfinding algorithms (**A\*** and **Dijkstra**) on a 2D grid. It allows interactive placement of obstacles, start and end points, and lets you observe how the algorithms find the shortest path.
 
-#### Dikstra
-![Dikstra](media/Dijkstra.gif)
+#### Dijkstra
+![Dijkstra](media/Dijkstra.gif)
 
 #### A*
 ![A*](media/Astar.gif)
