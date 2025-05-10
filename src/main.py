@@ -58,6 +58,12 @@ def make_grid():
     return[[Tile(row,col) for col in range(COLS)] for row in range(ROWS)]
 
 
+def clearPaths(grid):
+    for row in grid:
+        for tile in row:
+            if tile.color == TURQUISE or tile.color == PURPLE:
+                tile.reset()
+
 
 def main():
     pygame.init()
@@ -74,7 +80,7 @@ def main():
     end = None
 
     while run:
-        clock.tick(10)
+        clock.tick(60)
 
         if changed == True:
             draw(win, grid)
@@ -89,6 +95,7 @@ def main():
                         for tile in row:
                             tile.update_neighbors(grid)
 
+                    clearPaths(grid)
                     astar(lambda: draw(win, grid), grid, start, end)
                     changed = True
 
@@ -96,6 +103,7 @@ def main():
                     for row in grid:
                         for tile in row:
                             tile.update_neighbors(grid)
+                    clearPaths(grid)
                     dikstra(lambda: draw(win, grid), grid, start, end)
                     changed = True
 
